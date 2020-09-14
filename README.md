@@ -27,12 +27,12 @@ This is the repository with the Unity code for the main InVisionAR app.
    - If the new branch is for a new feature, prefix the branch name with `feature/`. For example, `feature/login-system`
    - If the new branch name is a bug fix, prefix the branch name with `bugfix/`. For example, `bugfix/signup-error`
 1. Switch to the new branch with `git checkout new-branch-name`.
+1. Create a pull request from your branch to the master branch of the main repository**(not the master of your repository)**
 1. Start working on your task!
 1. Stage and commit changes regularly with `git add <relevant files>` and `git commit -m "commit message"`, respectively.
 1. Push your changes regularly with `git commit origin new-branch-name`
 1. Pull changes from upstream master regulary with `git pull upstream master`. **Run step 6 after pulling from upstream master**. If there are merge conflicts, ask for help.
-1. When you are ready to push your changes to the root master, log on to GitHub.com and create a pull request from your branch(`new-branch-name`, for exmaple) to the master branch of the main repository.
-1. Attach the pull request to the Issue(task) you were working on
+1. When you are finished working on a task, ask for code review from Sagar Patil.
 1. Wait for code review.
 1. Fix things according to review feedback.
 1. If code review is passed, your branch will be merged. Go to step 6 and start working your next task. If your review did not pass, go back to step 15.
