@@ -9,6 +9,10 @@ This is the repository with the Unity code for the main InVisionAR app.
 - Visual Studio Code
 - Unity 2020.1.4f1
   - This is highly subject to change, so please update your Unity installation as neccesary.
+  - Remember to install Android Build Support
+  - Remember to install iOS build support(only do this if you are on a Mac)
+- Android Studio
+- XCode(only on Mac)
 
 ## Setting up the devlopment environment
 
