@@ -123,6 +123,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &471648712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 471648713}
+  m_Layer: 0
+  m_Name: Simulation Initialization Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &471648713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471648712}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &840434777
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c542d6f450f1a41a30a5ffe281bf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simulationInitializatonPoint: {fileID: 471648712}
+  rectangularPrismPrefab: {fileID: 4140534115243549996, guid: 773cee730ad368f469ca2d4de6a29240, type: 3}
 --- !u!1 &1980867912
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,13 +463,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063453999}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.14380465, y: -0.17722157, z: 0.026185596, w: 0.9732559}
+  m_LocalPosition: {x: 5.85, y: 2.601, z: -9.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.81, y: -20.64, z: 0}
 --- !u!114 &2063454003
 MonoBehaviour:
   m_ObjectHideFlags: 0
