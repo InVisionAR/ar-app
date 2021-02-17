@@ -48,7 +48,7 @@
             "Static": true
         },
         {
-            "Type": 1,
+            "Type": 3,
             "Material": {
                 "Color": {
                     "r": 1.0,
@@ -60,11 +60,11 @@
                 "Smoothness": 0.2
             },
             "PhysicMaterial": {
-                "bounciness": 0.0,
+                "bounciness": 1.0,
                 "dynamicFriction": 0.0,
                 "staticFriction": 0.0,
-                "frictionCombine": 0,
-                "bounceCombine": 0
+                "frictionCombine": 3,
+                "bounceCombine": 3
             },
             "Position": {
                 "x": -1.25,
