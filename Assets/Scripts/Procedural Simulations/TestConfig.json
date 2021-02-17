@@ -20,7 +20,7 @@
                     "a": 1.0
                 },
                 "Metallicness": 0.0,
-                "Smoothness": 0.20000000298023225
+                "Smoothness": 0.2
             },
             "PhysicMaterial": {
                 "bounciness": 0.0,
@@ -57,7 +57,7 @@
                     "a": 1.0
                 },
                 "Metallicness": 0.0,
-                "Smoothness": 0.20000000298023225
+                "Smoothness": 0.2
             },
             "PhysicMaterial": {
                 "bounciness": 0.0,
@@ -77,9 +77,9 @@
                 "z": -30.0
             },
             "Scale": {
-                "x": 0.8999999761581421,
-                "y": 0.8999999761581421,
-                "z": 0.8999999761581421
+                "x": 0.9,
+                "y": 0.9,
+                "z": 0.9
             },
             "Mass": 1.0,
             "Static": false
