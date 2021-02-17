@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         gameObject.transform.localScale = simulationObject.Scale;
 
         Material gameObjectMat = gameObject.GetComponent<Renderer>().material;
-        PhysicMaterial gameObjectPhysicMat = gameObject.GetComponent<Collider>().material;
+        PhysicMaterial gameObjectPhysicMaterial = gameObject.GetComponent<Collider>().material;
         Rigidbody gameObjectRigidbody = gameObject.GetComponent<Rigidbody>();
 
         simulationGameObjects.Add(gameObject);
@@ -109,11 +109,11 @@ public class GameManager : MonoBehaviour
     }
 
     void SetSimulationObjectPhysicMaterialProperties(PhysicMaterial gameObjectPhysicMaterial, SimulationObjectPhysicMaterial simulationObjectPhysicMaterial){
-        gameObjectPhysicMat.bounciness = simulationObjectPhysicMaterial.bounciness;
-        gameObjectPhysicMat.dynamicFriction = simulationObjectPhysicMaterial.dynamicFriction;
-        gameObjectPhysicMat.staticFriction = simulationObjectPhysicMaterial.staticFriction;
-        gameObjectPhysicMat.frictionCombine = simulationObjectPhysicMaterial.frictionCombine;
-        gameObjectPhysicMat.bounceCombine = simulationObjectPhysicMaterial.bounceCombine;
+        gameObjectPhysicMaterial.bounciness = simulationObjectPhysicMaterial.bounciness;
+        gameObjectPhysicMaterial.dynamicFriction = simulationObjectPhysicMaterial.dynamicFriction;
+        gameObjectPhysicMaterial.staticFriction = simulationObjectPhysicMaterial.staticFriction;
+        gameObjectPhysicMaterial.frictionCombine = simulationObjectPhysicMaterial.frictionCombine;
+        gameObjectPhysicMaterial.bounceCombine = simulationObjectPhysicMaterial.bounceCombine;
     }
 
     void Update()

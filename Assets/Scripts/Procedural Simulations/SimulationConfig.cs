@@ -46,7 +46,7 @@ public class SimulationConfig
     public string Name;
     public string Version;
     public string ConfigVersion;
-    public SimulationObjectPhysicMaterial PlanePhysicMaterial;
+    public SimulationObjectPhysicMaterial BasePlanePhysicMaterial;
     public SimulationObject[] Objects;
 
     public string ToJson()
