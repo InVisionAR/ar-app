@@ -3,81 +3,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SimulationObjectType
-{
-    RectangularPrism=1,
-    Sphere,
-    TriangularPrism,
-    RemoteMesh,
-    CustomMesh
-
-}
-
-[Serializable]
-public class SimulationObjectMaterial
-{
-    public Color Color;
-    public float Metallicness;
-    public float Smoothness;
-}
-
-[Serializable]
-public class SimulationObjectPhysicMaterial
-{
-    public float bounciness;
-    public float dynamicFriction;
-    public float staticFriction;
-    public PhysicMaterialCombine frictionCombine;
-    public PhysicMaterialCombine bounceCombine;
-}
-
-[Serializable]
-public class SimulationObject
-{
-    public SimulationObjectType Type;
-    public SimulationObjectMaterial Material;
-    public SimulationObjectPhysicMaterial PhysicMaterial;
-    public Vector3 Position;
-    public Vector3 EulerRotation;
-    public Vector3 Scale;
-}
-
-[Serializable]
-public class SimulationConfig
-{
-    public string Name;
-    public string Version;
-    public string ConfigVersion;
-    public SimulationObject[] Objects;
-}
-
 public class GameManager : MonoBehaviour
 {
     public GameObject simulationInitializatonPoint;
     
     [Header("Primative Prefabs")]
-    [SerializeField]
-    private GameObject rectangularPrismPrefab;
+    [SerializeField] private GameObject rectangularPrismPrefab;
+    [SerializeField] private GameObject triangularPrismPrefab;
+    [SerializeField] private GameObject spherePrefab;
+
+    [Header("Misc")]
+    public GameObject basePlane;
+    private PhysicMaterial basePlanePhysicMaterial;
+    
+    private List<GameObject> simulationGameObjects = new List<GameObject>();
+    private List<Material> simulationMaterials = new List<Material>();
+    private List<PhysicMaterial> simulationPhysicMaterials = new List<PhysicMaterial>();
+    private List<Rigidbody> simulationRigidbodies = new List<Rigidbody>();
+
 
     void Start()
     {
+        if(basePlane == null)
+        {
+            basePlane = GameObject.FindGameObjectsWithTag("Base Plane")[0];
+        }
+        
         var config = new SimulationConfig
         {
             Name = "Test",
             Version = "0.0.1",
-            ConfigVersion = "0.1.0",
+            ConfigVersion = "0.3.0",
+            BasePlanePhysicMaterial = new SimulationObjectPhysicMaterial { staticFriction = 0.0f, dynamicFriction = 0.0f, bounciness = 0.0f },
             Objects = new SimulationObject[]{
                 new SimulationObject
                 {
-                    Type = SimulationObjectType.RectangularPrism,
-                    Material = new SimulationObjectMaterial {Color=new Color(1.0f, 0.0f, 0.0f), Metallicness=1.0f, Smoothness=1.0f},
-                    PhysicMaterial = new SimulationObjectPhysicMaterial { staticFriction = 0.50f, dynamicFriction = 0.7f, bounciness = 0.3f },
-                    Position = new Vector3(0, 0, 0.5f),
+                    Type = SimulationObjectType.TriangularPrism,
+                    Material = new SimulationObjectMaterial {Color=new Color(1.0f, 1.0f, 1.0f), Metallicness=0.0f, Smoothness=0.2f},
+                    PhysicMaterial = new SimulationObjectPhysicMaterial { staticFriction = 0.0f, dynamicFriction = 0.0f, bounciness = 0.0f },
+                    Position = new Vector3(0, 1f, 0),
                     EulerRotation = new Vector3(0, 0, 0),
-                    Scale = new Vector3(0.5f, 5f, 3f)
+                    Scale = new Vector3(3f, 2f, 1.5f),
+                    Mass = 5.0f,
+                    Static = true
+                },
+                new SimulationObject
+                {
+                    Type = SimulationObjectType.RectangularPrism,
+                    Material = new SimulationObjectMaterial {Color=new Color(1.0f, 0.0f, 0.0f), Metallicness=0.0f, Smoothness=0.2f},
+                    PhysicMaterial = new SimulationObjectPhysicMaterial { staticFriction = 0.0f, dynamicFriction = 0.0f, bounciness = 0.0f },
+                    Position = new Vector3(-1.25f, 2.5f, 0),
+                    EulerRotation = new Vector3(0, 0, -30),
+                    Scale = new Vector3(0.9f, 0.9f, 0.9f),
+                    Mass = 1.0f,
+                    Static = false
                 }
             }
         };
+
+        basePlanePhysicMaterial = basePlane.GetComponent<Collider>().material;
+        SetSimulationObjectPhysicMaterialProperties(basePlanePhysicMaterial, config.BasePlanePhysicMaterial);
 
         foreach(SimulationObject simulationObject in config.Objects){
             BuildSimulationObject(simulationObject);
@@ -93,6 +78,12 @@ public class GameManager : MonoBehaviour
             case SimulationObjectType.RectangularPrism:
                 gameObject = (GameObject)Instantiate(rectangularPrismPrefab, simulationObject.Position, Quaternion.Euler(simulationObject.EulerRotation), simulationInitializatonPoint.transform);
                 break;
+            case SimulationObjectType.TriangularPrism:
+                gameObject = (GameObject)Instantiate(triangularPrismPrefab, simulationObject.Position, Quaternion.Euler(simulationObject.EulerRotation), simulationInitializatonPoint.transform);
+                break;
+            case SimulationObjectType.Sphere:
+                gameObject = (GameObject)Instantiate(spherePrefab, simulationObject.Position, Quaternion.Euler(simulationObject.EulerRotation), simulationInitializatonPoint.transform);
+                break;
             case 0:
                 break;
         }
@@ -100,16 +91,29 @@ public class GameManager : MonoBehaviour
 
         Material gameObjectMat = gameObject.GetComponent<Renderer>().material;
         PhysicMaterial gameObjectPhysicMat = gameObject.GetComponent<Collider>().material;
+        Rigidbody gameObjectRigidbody = gameObject.GetComponent<Rigidbody>();
+
+        simulationGameObjects.Add(gameObject);
+        simulationMaterials.Add(gameObjectMat);
+        simulationPhysicMaterials.Add(gameObjectPhysicMaterial);
+        simulationRigidbodies.Add(gameObjectRigidbody);
 
         gameObjectMat.color = simulationObject.Material.Color;
         gameObjectMat.SetFloat("_Metallic", simulationObject.Material.Metallicness);
         gameObjectMat.SetFloat("_Smoothness", simulationObject.Material.Smoothness);
 
-        gameObjectPhysicMat.bounciness = simulationObject.PhysicMaterial.bounciness;
-        gameObjectPhysicMat.dynamicFriction = simulationObject.PhysicMaterial.dynamicFriction;
-        gameObjectPhysicMat.staticFriction = simulationObject.PhysicMaterial.staticFriction;
-        gameObjectPhysicMat.frictionCombine = simulationObject.PhysicMaterial.frictionCombine;
-        gameObjectPhysicMat.bounceCombine = simulationObject.PhysicMaterial.bounceCombine;
+        SetSimulationObjectPhysicMaterialProperties(gameObjectPhysicMaterial, simulationObject.PhysicMaterial);
+
+        gameObjectRigidbody.mass = simulationObject.Mass;
+        gameObjectRigidbody.isKinematic = simulationObject.Static;
+    }
+
+    void SetSimulationObjectPhysicMaterialProperties(PhysicMaterial gameObjectPhysicMaterial, SimulationObjectPhysicMaterial simulationObjectPhysicMaterial){
+        gameObjectPhysicMat.bounciness = simulationObjectPhysicMaterial.bounciness;
+        gameObjectPhysicMat.dynamicFriction = simulationObjectPhysicMaterial.dynamicFriction;
+        gameObjectPhysicMat.staticFriction = simulationObjectPhysicMaterial.staticFriction;
+        gameObjectPhysicMat.frictionCombine = simulationObjectPhysicMaterial.frictionCombine;
+        gameObjectPhysicMat.bounceCombine = simulationObjectPhysicMaterial.bounceCombine;
     }
 
     void Update()
