@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -28,38 +29,13 @@ public class GameManager : MonoBehaviour
         {
             basePlane = GameObject.FindGameObjectsWithTag("Base Plane")[0];
         }
+
+        SimulationConfig config;
         
-        var config = new SimulationConfig
-        {
-            Name = "Test",
-            Version = "0.0.1",
-            ConfigVersion = "0.3.0",
-            BasePlanePhysicMaterial = new SimulationObjectPhysicMaterial { staticFriction = 0.0f, dynamicFriction = 0.0f, bounciness = 0.0f },
-            Objects = new SimulationObject[]{
-                new SimulationObject
-                {
-                    Type = SimulationObjectType.TriangularPrism,
-                    Material = new SimulationObjectMaterial {Color=new Color(1.0f, 1.0f, 1.0f), Metallicness=0.0f, Smoothness=0.2f},
-                    PhysicMaterial = new SimulationObjectPhysicMaterial { staticFriction = 0.0f, dynamicFriction = 0.0f, bounciness = 0.0f },
-                    Position = new Vector3(0, 1f, 0),
-                    EulerRotation = new Vector3(0, 0, 0),
-                    Scale = new Vector3(3f, 2f, 1.5f),
-                    Mass = 5.0f,
-                    Static = true
-                },
-                new SimulationObject
-                {
-                    Type = SimulationObjectType.RectangularPrism,
-                    Material = new SimulationObjectMaterial {Color=new Color(1.0f, 0.0f, 0.0f), Metallicness=0.0f, Smoothness=0.2f},
-                    PhysicMaterial = new SimulationObjectPhysicMaterial { staticFriction = 0.0f, dynamicFriction = 0.0f, bounciness = 0.0f },
-                    Position = new Vector3(-1.25f, 2.5f, 0),
-                    EulerRotation = new Vector3(0, 0, -30),
-                    Scale = new Vector3(0.9f, 0.9f, 0.9f),
-                    Mass = 1.0f,
-                    Static = false
-                }
-            }
-        };
+        using(StreamReader r = new StreamReader("Assets/Scripts/Procedural Simulations/TestConfig.json")){
+            string configJson = r.ReadToEnd();
+            config = SimulationConfig.FromJson(configJson);
+        }
 
         basePlanePhysicMaterial = basePlane.GetComponent<Collider>().material;
         SetSimulationObjectPhysicMaterialProperties(basePlanePhysicMaterial, config.BasePlanePhysicMaterial);
@@ -67,9 +43,6 @@ public class GameManager : MonoBehaviour
         foreach(SimulationObject simulationObject in config.Objects){
             BuildSimulationObject(simulationObject);
         }
-
-        // string configJson = JsonUtility.ToJson(config);
-        // Debug.Log(configJson); <-- works as expected
     }
 
     void BuildSimulationObject(SimulationObject simulationObject){

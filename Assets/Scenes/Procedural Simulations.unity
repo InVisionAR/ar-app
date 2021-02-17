@@ -292,6 +292,7 @@ MonoBehaviour:
   rectangularPrismPrefab: {fileID: 4140534115243549996, guid: 773cee730ad368f469ca2d4de6a29240, type: 3}
   triangularPrismPrefab: {fileID: 8406568836201191522, guid: 21e092ffdac23fd4f9509af2bb4e93c1, type: 3}
   spherePrefab: {fileID: 6561966385466026760, guid: f1b1eaa89fae27d438df170b725b41a7, type: 3}
+  basePlane: {fileID: 1980867912}
 --- !u!1 &1980867912
 GameObject:
   m_ObjectHideFlags: 0
