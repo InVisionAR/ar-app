@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        TogglePause();
         if(basePlane == null)
         {
             basePlane = GameObject.FindGameObjectsWithTag("Base Plane")[0];
@@ -121,7 +122,7 @@ public class GameManager : MonoBehaviour
             pauseText.SetActive(false);
             Time.timeScale = 0;
         }
-        Time.fixedDeltaTime = 0.02f * timeScale;
+        // Time.fixedDeltaTime = 0.02f * timeScale;
         paused = !paused;
     }
 
@@ -129,7 +130,7 @@ public class GameManager : MonoBehaviour
         timeScale = slider.value;
         if(!paused){
             Time.timeScale = timeScale;
-            Time.fixedDeltaTime = 0.02f * timeScale;
+            // Time.fixedDeltaTime = 0.02f * timeScale;
         }
     }
 }
