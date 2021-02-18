@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject rectangularPrismPrefab;
     [SerializeField] private GameObject triangularPrismPrefab;
     [SerializeField] private GameObject spherePrefab;
+
+    [Header("UI")]
+    private bool paused = false;
+    private float timeScale = 1.0f;
+    [SerializeField] private GameObject playText;
+    [SerializeField] private GameObject pauseText;
 
     [Header("Misc")]
     public GameObject basePlane;
@@ -100,6 +107,29 @@ public class GameManager : MonoBehaviour
                 simulationRigidbodies.RemoveAt(i);
                 i--;
             }
+        }
+    }
+
+    public void TogglePause(){
+        if(paused){
+            playText.SetActive(false);
+            pauseText.SetActive(true);
+            Time.timeScale = timeScale;
+        }
+        else{
+            playText.SetActive(true);
+            pauseText.SetActive(false);
+            Time.timeScale = 0;
+        }
+        Time.fixedDeltaTime = 0.02f * timeScale;
+        paused = !paused;
+    }
+
+    public void TimeScaleChanged(Slider slider){
+        timeScale = slider.value;
+        if(!paused){
+            Time.timeScale = timeScale;
+            Time.fixedDeltaTime = 0.02f * timeScale;
         }
     }
 }

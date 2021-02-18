@@ -61,9 +61,9 @@
             },
             "PhysicMaterial": {
                 "bounciness": 1.0,
-                "dynamicFriction": 0.0,
-                "staticFriction": 0.0,
-                "frictionCombine": 3,
+                "dynamicFriction": 0.1,
+                "staticFriction": 1,
+                "frictionCombine": 1,
                 "bounceCombine": 3
             },
             "Position": {

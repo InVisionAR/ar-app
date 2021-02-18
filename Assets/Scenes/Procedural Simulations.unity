@@ -749,7 +749,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 962507447}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1719317769}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: TogglePause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &962507447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1121,7 +1133,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1719317769}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: TimeScaleChanged
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1558609687}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1707409540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,6 +1259,8 @@ MonoBehaviour:
   rectangularPrismPrefab: {fileID: 4140534115243549996, guid: 773cee730ad368f469ca2d4de6a29240, type: 3}
   triangularPrismPrefab: {fileID: 8406568836201191522, guid: 21e092ffdac23fd4f9509af2bb4e93c1, type: 3}
   spherePrefab: {fileID: 6561966385466026760, guid: f1b1eaa89fae27d438df170b725b41a7, type: 3}
+  playText: {fileID: 1214245531}
+  pauseText: {fileID: 717792224}
   basePlane: {fileID: 1980867912}
 --- !u!1 &1889334777
 GameObject:
