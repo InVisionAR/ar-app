@@ -91,6 +91,15 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        for(int i = 0; i < simulationGameObjects.Count; i++){
+            if(simulationGameObjects[i].transform.position.y < 0){
+                Destroy(simulationGameObjects[i]);
+                simulationGameObjects.RemoveAt(i);
+                simulationMaterials.RemoveAt(i);
+                simulationPhysicMaterials.RemoveAt(i);
+                simulationRigidbodies.RemoveAt(i);
+                i--;
+            }
+        }
     }
 }
