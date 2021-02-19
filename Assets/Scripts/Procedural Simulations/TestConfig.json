@@ -24,14 +24,14 @@
             },
             "PhysicMaterial": {
                 "bounciness": 0.0,
-                "dynamicFriction": 0.0,
-                "staticFriction": 0.0,
+                "dynamicFriction": 0.5,
+                "staticFriction": 0,
                 "frictionCombine": 0,
                 "bounceCombine": 0
             },
             "Position": {
                 "x": 0.0,
-                "y": 1.0,
+                "y": 2.0,
                 "z": 0.0
             },
             "EulerRotation": {
@@ -41,11 +41,11 @@
             },
             "Scale": {
                 "x": 3.0,
-                "y": 2.0,
+                "y": 4.0,
                 "z": 1.5
             },
-            "Mass": 5.0,
-            "Static": true
+            "Mass": 500.0,
+            "Static": false
         },
         {
             "Type": 1,
@@ -60,7 +60,7 @@
                 "Smoothness": 0.2
             },
             "PhysicMaterial": {
-                "bounciness": 1.0,
+                "bounciness": 0.5,
                 "dynamicFriction": 0.1,
                 "staticFriction": 1,
                 "frictionCombine": 1,
@@ -68,20 +68,20 @@
             },
             "Position": {
                 "x": -1.25,
-                "y": 2.5,
+                "y": 4.5,
                 "z": 0.0
             },
             "EulerRotation": {
                 "x": 0.0,
                 "y": 0.0,
-                "z": -30.0
+                "z": 32
             },
             "Scale": {
                 "x": 0.9,
                 "y": 0.9,
                 "z": 0.9
             },
-            "Mass": 1.0,
+            "Mass": 8000.0,
             "Static": false
         },
         {
@@ -89,7 +89,7 @@
             "Material": {
                 "Color": {
                     "r": 1.0,
-                    "g": 0.0,
+                    "g": 1.0,
                     "b": 0.0,
                     "a": 1.0
                 },
@@ -104,8 +104,8 @@
                 "bounceCombine": 3
             },
             "Position": {
-                "x": -1.25,
-                "y": 5,
+                "x": 0,
+                "y": 4,
                 "z": 0.0
             },
             "EulerRotation": {
@@ -118,7 +118,7 @@
                 "y": 0.9,
                 "z": 0.9
             },
-            "Mass": 1.0,
+            "Mass": 500.0,
             "Static": false
         }
     ]

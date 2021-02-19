@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour
             basePlane = GameObject.FindGameObjectsWithTag("Base Plane")[0];
         }
 
+        BuildScene();
+    }
+
+    void BuildScene(){
         SimulationConfig config;
         
         using(StreamReader r = new StreamReader("Assets/Scripts/Procedural Simulations/TestConfig.json")){
@@ -51,6 +55,17 @@ public class GameManager : MonoBehaviour
         foreach(SimulationObject simulationObject in config.Objects){
             BuildSimulationObject(simulationObject);
         }
+    }
+
+    void ClearScene(){
+        foreach(GameObject simGameObj in simulationGameObjects){
+            Destroy(simGameObj);
+        }
+
+        simulationGameObjects.Clear();
+        simulationMaterials.Clear();
+        simulationPhysicMaterials.Clear();
+        simulationRigidbodies.Clear();
     }
 
     void BuildSimulationObject(SimulationObject simulationObject){
@@ -113,17 +128,27 @@ public class GameManager : MonoBehaviour
 
     public void TogglePause(){
         if(paused){
-            playText.SetActive(false);
-            pauseText.SetActive(true);
-            Time.timeScale = timeScale;
+            UnPause();   
         }
         else{
-            playText.SetActive(true);
-            pauseText.SetActive(false);
-            Time.timeScale = 0;
+            Pause();
         }
-        // Time.fixedDeltaTime = 0.02f * timeScale;
-        paused = !paused;
+    }
+
+    void UnPause(){
+        playText.SetActive(false);
+        pauseText.SetActive(true);
+        Time.timeScale = timeScale;
+
+        paused = false;
+    }
+
+    void Pause(){
+        playText.SetActive(true);
+        pauseText.SetActive(false);
+        Time.timeScale = 0;
+
+        paused = true;
     }
 
     public void TimeScaleChanged(Slider slider){
@@ -132,5 +157,10 @@ public class GameManager : MonoBehaviour
             Time.timeScale = timeScale;
             // Time.fixedDeltaTime = 0.02f * timeScale;
         }
+    }
+
+    public void Reload(){
+        ClearScene();
+        BuildScene();
     }
 }
