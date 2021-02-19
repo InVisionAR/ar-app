@@ -7,7 +7,7 @@ This is the repository with the Unity code for the main InVisionAR app.
 - Git
 - **_Git LFS_**
 - Visual Studio Code
-- Unity 2020.1.11f1
+- Unity 2020.2.5f1
   - This is highly subject to change, so please update your Unity installation as neccesary.
   - Remember to install Android Build Support
   - Remember to install iOS build support(only do this if you are on a Mac and have an iPhone)
